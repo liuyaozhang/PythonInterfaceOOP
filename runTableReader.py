@@ -30,7 +30,7 @@ from dqtasks.tableReader import TableReader
 # Predefined selections for setSwitch function
 sameEventPairingParameters = [
     "processJpsiToEESkimmed", "processJpsiToMuMuSkimmed", "processJpsiToMuMuVertexingSkimmed", "processVnJpsiToEESkimmed",
-    "processVnJpsiToMuMuSkimmed", "processElectronMuonSkimmed", "processAllSkimmed"
+    "processVnJpsiToMuMuSkimmed", "processElectronMuonSkimmed", "processAllSkimmed", "processKFParticle"
     ]
 
 eventMixingParameters = [
@@ -62,6 +62,11 @@ eventMixingDeps = {
     "processBarrelVnSkimmed": {"analysis-track-selection": "processSkimmed"},
     "processMuonVnSkimmed": {"analysis-muon-selection": "processSkimmed"}
     }
+KFParticleTaskName = "analysis-qa-kfparticle"
+KFParticleDeps = {
+    "processKFParticle":{"analysis-same-event-pairing","processJpsiToEESkimmed"}
+    }
+
 # yapf: enable
 
 # init args manually
@@ -137,6 +142,7 @@ oneToMultiDepsChecker(args.mixing, "eventMixing", args.analysis, "analysis")
 oneToMultiDepsChecker(args.process, "sameEventPairing", args.analysis, "analysis")
 depsChecker(config, sameEventPairingDeps, sameEventTaskName)
 depsChecker(config, eventMixingDeps, eventMixingTaskName)
+depsChecker(config, KFParticleDeps, KFParticleTaskName)
 
 # Write the updated configuration file into a temporary file
 updatedConfigFileName = "tempConfigTableReader.json"

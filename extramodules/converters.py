@@ -57,6 +57,11 @@ class O2Converters(object):
             help = "Add Converts V0 and cascade version 000 to 001 (Adds your workflow o2-analysis-weak-decay-indices task)",
             action = "store_true",
             )
+        groupO2Converters.add_argument(
+            "--add_kf_particle",
+            help = "Add KF particle for JpsiToEE analysis (Adds your workflow o2-analysis-qa-kf-particle)",
+            action = "store_true",
+        )
     
     def parseArgs(self):
         """

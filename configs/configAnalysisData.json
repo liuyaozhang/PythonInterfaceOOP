@@ -60,6 +60,7 @@
         "processSkimmed": "false",
         "processDummy": "true"
     },
+    "analysis-qa-kfparticle": "",
     "internal-dpl-aod-global-analysis-file-sink": "",
     "internal-dpl-aod-writer": ""
 }
