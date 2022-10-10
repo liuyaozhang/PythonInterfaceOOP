@@ -101,7 +101,7 @@ def setConverters(allArgs: dict, updatedConfigFileName: str, commandToRun: str):
         "add_fdd_conv": "o2-analysis-fdd-converter",
         "add_track_prop": "o2-analysis-track-propagation",
         "add_weakdecay_ind": "o2-analysis-weak-decay-indices",
-        "add_kf_particle": "o2-analysis-qa-kf-particle"
+        "add_kf_particle": "o2-analysis-qa-kfparticle"
         }
     
     for cliArg, cliValue in allArgs.items():

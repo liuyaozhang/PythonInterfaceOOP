@@ -58,8 +58,8 @@ class O2Converters(object):
             action = "store_true",
             )
         groupO2Converters.add_argument(
-            "--add_kf_particle",
-            help = "Add KF particle for JpsiToEE analysis (Adds your workflow o2-analysis-qa-kf-particle)",
+            "--add_kfparticle",
+            help = "Add KF particle for JpsiToEE analysis (Adds your workflow o2-analysis-qa-kfparticle)",
             action = "store_true",
         )
     
