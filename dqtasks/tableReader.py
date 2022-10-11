@@ -28,7 +28,7 @@ from extramodules.helperOptions import HelperOptions
 from extramodules.choicesHandler import NoAction
 from extramodules.choicesHandler import ChoicesAction
 from extramodules.helperOptions import HelperOptions
-
+from extramodules.converters import O2Converters
 
 class TableReader(object):
     
@@ -43,13 +43,14 @@ class TableReader(object):
         self, parserTableReader = argparse.ArgumentParser(
             formatter_class = argparse.ArgumentDefaultsHelpFormatter,
             description = "Example Usage: ./runTableReader.py <yourConfig.json> --arg value",
-            ), helperOptions = HelperOptions(), dplAodReader = DplAodReader(), dqLibGetter = DQLibGetter()
+            ), helperOptions = HelperOptions(), dplAodReader = DplAodReader(), dqLibGetter = DQLibGetter(), o2Converters = O2Converters()
         ):
         super(TableReader, self).__init__()
         self.parserTableReader = parserTableReader
         self.helperOptions = helperOptions
         self.dplAodReader = dplAodReader
         self.dqLibGetter = dqLibGetter
+        self.o2Converters = o2Converters
         self.parserTableReader.register("action", "none", NoAction)
         self.parserTableReader.register("action", "store_choice", ChoicesAction)
     
@@ -215,5 +216,6 @@ class TableReader(object):
         
         self.dplAodReader.parserDplAodReader = self.parserTableReader
         self.dplAodReader.addArguments()
-        
+        self.o2Converters.parserO2Converters = self.parserTableReader
+        self.o2Converters.addArguments()
         self.addArguments()

@@ -30,7 +30,7 @@ from dqtasks.tableReader import TableReader
 # Predefined selections for setSwitch function
 sameEventPairingParameters = [
     "processJpsiToEESkimmed", "processJpsiToMuMuSkimmed", "processJpsiToMuMuVertexingSkimmed", "processVnJpsiToEESkimmed",
-    "processVnJpsiToMuMuSkimmed", "processElectronMuonSkimmed", "processAllSkimmed", "processKFParticle"
+    "processVnJpsiToMuMuSkimmed", "processElectronMuonSkimmed", "processAllSkimmed"
     ]
 
 eventMixingParameters = [
@@ -64,7 +64,7 @@ eventMixingDeps = {
     }
 KFParticleTaskName = "analysis-qa-kfparticle"
 KFParticleDeps = {
-    "processKFParticle": {"analysis-same-event-pairing", "processJpsiToEESkimmed"}
+    "processKFParticle": {"analysis-same-event-pairing": "processJpsiToEESkimmed"}
     }
 
 # yapf: enable
