@@ -99,6 +99,8 @@ class TableMaker(object):
             "MuonOnlyWithCent": "Build muon-only DQ skimmed data model, w/ centrality",
             "MuonOnlyWithFilter": "Build muon-only DQ skimmed data model, w/ event filter",
             "MuonOnlyWithQvector": "Build muon-only DQ skimmed data model, w/ q vector",
+            "AmbiguousMuonOnly": "Build muon-only DQ skimmed data model with QA plots for ambiguous muons",
+            "AmbiguousBarrelOnly": "Build muon-only DQ skimmed data model with QA plots for ambiguous tracks",
             "OnlyBCs": "Analyze the BCs to store sampled lumi",
             }
         tableMakerProcessSelectionsList = []
@@ -110,6 +112,8 @@ class TableMaker(object):
         # Get DQ Analysis Selections from O2-DQ Framework Header Files
         allAnalysisCuts = self.dqLibGetter.allAnalysisCuts
         allSels = self.dqLibGetter.allSels
+        allEventHistos = self.dqLibGetter.allEventHistos
+        allTrackHistos = self.dqLibGetter.allTrackHistos
         
         # Interface
         
@@ -186,10 +190,19 @@ class TableMaker(object):
             "--cfgMuonCuts", help = "Space separated list of muon cuts in table-maker", action = "store", nargs = "*", type = str,
             metavar = "CFGMUONCUTS", choices = allAnalysisCuts,
             ).completer = ChoicesCompleterList(allAnalysisCuts)
+        groupTableMakerConfigs.add_argument(
+            "--cfgAddEventHistogram", help = "Comma separated list of event histograms", action = "store", nargs = "*", type = str, metavar="CFGADDEVENTHISTOGRAM", choices = allEventHistos,
+            ).completer = ChoicesCompleterList(allEventHistos)
+        groupTableMakerConfigs.add_argument(
+            "--cfgAddTrackHistogram", help = "Comma separated list of track histograms", action = "store", nargs= "*", type = str, metavar="CFGADDTRACKHISTOGRAM", choices = allTrackHistos,
+            ).completer = ChoicesCompleterList(allTrackHistos)
+        groupTableMakerConfigs.add_argument(
+            "--cfgAddMuonHistogram", help = "Comma separated list of muon histograms", action = "store", nargs="*", type = str, metavar="CFGADDMUONHISTOGRAM", choices = allTrackHistos,
+            ).completer = ChoicesCompleterList(allTrackHistos)
         groupTableMakerConfigs.add_argument("--cfgBarrelLowPt", help = "Low pt cut for tracks in the barrel", action = "store", type = str)
         groupTableMakerConfigs.add_argument("--cfgMuonLowPt", help = "Low pt cut for muons", action = "store", type = str)
         groupTableMakerConfigs.add_argument(
-            "--cfgNoQA", help = "If true, no QA histograms", action = "store", type = str.lower, choices = booleanSelections,
+            "--cfgQA", help = "If true, fill QA histograms", action = "store", type = str.lower, choices = booleanSelections,
             ).completer = ChoicesCompleter(booleanSelections)
         groupTableMakerConfigs.add_argument(
             "--cfgDetailedQA", help = "If true, include more QA histograms (BeforeCuts classes and more)", action = "store",
